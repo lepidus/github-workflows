@@ -1,0 +1,56 @@
+on:
+  workflow_call:
+    inputs:
+      plugin_name:
+        required: true
+        type: string
+
+name: Create release and tar.gz package for it
+
+jobs:
+  create-release:
+    name: Create release and package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      PLUGIN_NAME: ${{ inputs.plugin_name }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check version.xml
+        run: |
+          sudo apt install -y xmlstarlet
+          application=$(xmlstarlet sel -t -v 'version/application' version.xml)
+          if [ "$application" != "$PLUGIN_NAME" ]; then
+            echo "Application mismatch: expected $PLUGIN_NAME, got $application"
+            exit 1
+          fi
+          release=$(xmlstarlet sel -t -v 'version/release' version.xml)
+          tag=${{ github.ref }}
+          tag=${tag/refs\/tags\/v/}
+          if [[ "$release" != "$tag"* ]]; then
+            echo "Version mismatch: expected $tag, got $release"
+            exit 1
+          fi
+          date_version=$(xmlstarlet sel -t -v 'version/date' version.xml)
+          current_date=$(date +'%Y-%m-%d')
+          if [ "$date_version" != "$current_date" ]; then
+            echo "Date mismatch: expected $current_date, got $date_version"
+            exit 1
+          fi
+        shell: bash
+
+      - name: Create the tar.gz package
+        run: |
+          mkdir $PLUGIN_NAME
+          shopt -s extglob
+          cp -r !($PLUGIN_NAME|.git*|.|..|tests|cypress|resources|CLAUDE.md|package.json|package-lock.json|vite.config.js|i18nExtractKeys.vite.js) $PLUGIN_NAME
+          tar -zcvf $PLUGIN_NAME.tar.gz $PLUGIN_NAME
+        shell: bash
+
+      - name: Create release and upload package
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ inputs.plugin_name }}.tar.gz
