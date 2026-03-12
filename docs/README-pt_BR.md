@@ -1,6 +1,6 @@
 # github-workflows
 
-[English](/lepidus/github-workflows/blob/main/README.md) | **Português Brasileiro** | [Español](/lepidus/github-workflows/blob/main/docs/README-es.md)
+[English](../README.md) | **Português Brasileiro** | [Español](README-es.md)
 
 Workflows reutilizáveis do GitHub Actions para plugins da Lepidus.
 
