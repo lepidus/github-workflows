@@ -1,26 +1,26 @@
 # github-workflows
 
-**English** | [Português Brasileiro](docs/README-pt_BR.md) | [Español](docs/README-es.md)
+**Português Brasileiro** | [English](docs/README-en.md) | [Español](docs/README-es.md)
 
-Reusable GitHub Actions workflows for Lepidus plugins.
+Workflows reutilizáveis do GitHub Actions para plugins da Lepidus.
 
-## Available workflows
+## Workflows disponíveis
 
 ### `generate-package.yml`
 
-Validates `version.xml` and generates a `.tar.gz` package as a release asset when a tag is pushed.
+Valida o `version.xml` e gera um pacote `.tar.gz` como asset de release ao criar uma tag.
 
-**Validations performed:**
-- The `application` field in `version.xml` matches the plugin name
-- The `release` field matches the pushed tag
-- The `date` field matches the current date
+**Validações realizadas:**
+- O campo `application` do `version.xml` corresponde ao nome do plugin
+- O campo `release` corresponde à tag criada
+- O campo `date` corresponde à data atual
 
-**Files excluded from the package:**
+**Arquivos excluídos do pacote:**
 `tests`, `cypress`, `resources`, `CLAUDE.md`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
 
-#### Usage
+#### Como usar
 
-In the plugin repository, create `.github/workflows/generate-package.yml`:
+No repositório do plugin, crie `.github/workflows/generate-package.yml`:
 
 ```yaml
 on:
@@ -34,10 +34,12 @@ jobs:
   create-release:
     uses: lepidus/github-workflows/.github/workflows/generate-package.yml@main
     with:
-      plugin_name: yourPluginName
+      plugin_name: nomeDoseuPlugin
+    permissions:
+      contents: write
 ```
 
-#### Requirements
+#### Pré-requisitos
 
-- The repository must have a `version.xml` file at the root with `application`, `release`, and `date` fields
-- Tags must follow the `v*` pattern (e.g. `v1.0.0.0`)
+- O repositório deve ter um arquivo `version.xml` na raiz com os campos `application`, `release` e `date`
+- As tags devem seguir o padrão `v*` (ex: `v1.0.0.0`)

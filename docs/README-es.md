@@ -1,6 +1,6 @@
 # github-workflows
 
-[English](../README.md) | [Português Brasileiro](README-pt_BR.md) | **Español**
+[Português Brasileiro](../README.md) | [English](README-en.md) | **Español**
 
 Workflows reutilizables de GitHub Actions para plugins de Lepidus.
 
@@ -35,6 +35,8 @@ jobs:
     uses: lepidus/github-workflows/.github/workflows/generate-package.yml@main
     with:
       plugin_name: nombreDeSuPlugin
+    permissions:
+      contents: write
 ```
 
 #### Requisitos
