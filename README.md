@@ -1,26 +1,26 @@
 # github-workflows
 
-**Português Brasileiro** | [English](docs/README-en.md) | [Español](docs/README-es.md)
+**English** | [Português Brasileiro](docs/README-pt_BR.md) | [Español](docs/README-es.md)
 
-Workflows reutilizáveis do GitHub Actions para plugins da Lepidus.
+Reusable GitHub Actions workflows for Lepidus plugins.
 
-## Workflows disponíveis
+## Available workflows
 
 ### `generate-package.yml`
 
-Valida o `version.xml` e gera um pacote `.tar.gz` como asset de release ao criar uma tag.
+Validates `version.xml`, generates a `.tar.gz` package, and publishes a complete English release when a tag is pushed. The release description contains compatibility metadata, automatically generated changes, and installation instructions.
 
-**Validações realizadas:**
-- O campo `application` do `version.xml` corresponde ao nome do plugin
-- O campo `release` corresponde à tag criada
-- O campo `date` corresponde à data atual
+**Validations performed:**
+- The `application` field in `version.xml` matches the plugin name
+- The `release` field exactly matches the pushed tag without the `v` prefix
+- The `date` field matches the current date
 
-**Arquivos excluídos do pacote:**
-`tests`, `cypress`, `resources`, `CLAUDE.md`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
+**Files excluded from the package:**
+`.agents`, `.codex`, `.gitattributes`, `.github`, `.gitignore`, `.gitlab-ci.yml`, `.gitmodules`, `AGENTS.md`, `CLAUDE.md`, `tests`, `cypress`, `resources`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
 
-#### Como usar
+#### Usage
 
-No repositório do plugin, crie `.github/workflows/generate-package.yml`:
+In the plugin repository, create `.github/workflows/generate-package.yml`:
 
 ```yaml
 on:
@@ -34,12 +34,22 @@ jobs:
   create-release:
     uses: lepidus/github-workflows/.github/workflows/generate-package.yml@main
     with:
-      plugin_name: nomeDoseuPlugin
+      plugin_name: yourPluginName
+      pkp_application: OJS
+      compatible_versions: OJS 3.5.x
+      release_branch: stable-3_5_0
     permissions:
       contents: write
 ```
 
-#### Pré-requisitos
+#### Requirements
 
-- O repositório deve ter um arquivo `version.xml` na raiz com os campos `application`, `release` e `date`
-- As tags devem seguir o padrão `v*` (ex: `v1.0.0.0`)
+- The repository must have a `version.xml` file at the root with `application`, `release`, and `date` fields
+- Tags must follow the `v*` pattern (e.g. `v1.0.0.0`)
+- `plugin_name` is required and must match `version/application`
+- The compatibility inputs keep release metadata accurate and are strongly recommended:
+  - `pkp_application`: compatible PKP application, such as `OJS`, `OMP`, or `OPS`
+  - `compatible_versions`: compatible application versions, such as `OJS 3.5.x`
+  - `release_branch`: branch from which the release was prepared, such as `stable-3_5_0`
+- Existing callers that only pass `plugin_name` remain compatible. Missing compatibility values and the release branch are identified in English as not specified instead of being inferred
+- The caller must grant `contents: write` permission so the workflow can create the release and upload its package
