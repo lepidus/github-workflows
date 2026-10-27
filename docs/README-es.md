@@ -16,7 +16,7 @@ Valida el `version.xml` y genera un paquete `.tar.gz` como asset de release al c
 - El campo `date` corresponde a la fecha actual
 
 **Archivos excluidos del paquete:**
-`tests`, `cypress`, `resources`, `CLAUDE.md`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
+`tests`, `cypress`, `resources`, `AGENTS.md`, `CLAUDE.md`, `node_modules`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
 
 #### Cómo usar
 
@@ -43,3 +43,7 @@ jobs:
 
 - El repositorio debe tener un archivo `version.xml` en la raíz con los campos `application`, `release` y `date`
 - Las etiquetas deben seguir el patrón `v*` (ej: `v1.0.0.0`)
+
+## Pruebas del empaquetado
+
+Ejecute `python3 -m unittest discover -s tests -v` con Python 3 y PyYAML instalados. La prueba ejecuta la etapa real de empaquetado en un plugin de ejemplo y comprueba las exclusiones y la conservación de los archivos de runtime.
