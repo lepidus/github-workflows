@@ -48,7 +48,7 @@ jobs:
         run: |
           mkdir $PLUGIN_NAME
           shopt -s extglob
-          cp -r !($PLUGIN_NAME|.git*|.|..|tests|cypress|resources|CLAUDE.md|package.json|package-lock.json|vite.config.js|i18nExtractKeys.vite.js) $PLUGIN_NAME
+          cp -r !($PLUGIN_NAME|.git*|.|..|tests|cypress|resources|AGENTS.md|CLAUDE.md|node_modules|package.json|package-lock.json|vite.config.js|i18nExtractKeys.vite.js) $PLUGIN_NAME
           tar -zcvf $PLUGIN_NAME.tar.gz $PLUGIN_NAME
         shell: bash
 

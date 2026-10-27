@@ -16,7 +16,7 @@ Valida o `version.xml` e gera um pacote `.tar.gz` como asset de release ao criar
 - O campo `date` corresponde à data atual
 
 **Arquivos excluídos do pacote:**
-`tests`, `cypress`, `resources`, `CLAUDE.md`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
+`tests`, `cypress`, `resources`, `AGENTS.md`, `CLAUDE.md`, `node_modules`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
 
 #### Como usar
 

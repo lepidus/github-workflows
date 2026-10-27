@@ -16,7 +16,7 @@ Valida el `version.xml` y genera un paquete `.tar.gz` como asset de release al c
 - El campo `date` corresponde a la fecha actual
 
 **Archivos excluidos del paquete:**
-`tests`, `cypress`, `resources`, `CLAUDE.md`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
+`tests`, `cypress`, `resources`, `AGENTS.md`, `CLAUDE.md`, `node_modules`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
 
 #### Cómo usar
 

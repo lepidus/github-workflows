@@ -16,7 +16,7 @@ Validates `version.xml` and generates a `.tar.gz` package as a release asset whe
 - The `date` field matches the current date
 
 **Files excluded from the package:**
-`tests`, `cypress`, `resources`, `CLAUDE.md`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
+`tests`, `cypress`, `resources`, `AGENTS.md`, `CLAUDE.md`, `node_modules`, `package.json`, `package-lock.json`, `vite.config.js`, `i18nExtractKeys.vite.js`
 
 #### Usage
 
