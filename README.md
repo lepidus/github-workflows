@@ -43,7 +43,3 @@ jobs:
 
 - O repositório deve ter um arquivo `version.xml` na raiz com os campos `application`, `release` e `date`
 - As tags devem seguir o padrão `v*` (ex: `v1.0.0.0`)
-
-## Testes do empacotamento
-
-Execute `python3 -m unittest discover -s tests -v` com Python 3 e PyYAML instalados. O teste executa a etapa real de empacotamento em um plugin de exemplo e verifica as exclusões e a preservação dos arquivos de runtime.

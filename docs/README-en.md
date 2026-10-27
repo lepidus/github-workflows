@@ -43,7 +43,3 @@ jobs:
 
 - The repository must have a `version.xml` file at the root with `application`, `release`, and `date` fields
 - Tags must follow the `v*` pattern (e.g. `v1.0.0.0`)
-
-## Packaging tests
-
-Run `python3 -m unittest discover -s tests -v` with Python 3 and PyYAML installed. The test runs the actual packaging step on an example plugin and checks exclusions and runtime file preservation.
